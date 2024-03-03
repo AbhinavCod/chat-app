@@ -10,17 +10,17 @@ import messageRoutes from "./routes/message.js";
 import userRoutes from "./routes/userRoute.js";
 
 import {app,server} from "./socket/socket.js";
-
+const allowedOrigins = ["http://localhost:3000", "https://your-render-app.onrender.com"];
 
 const __dirname = path.resolve();
 
 const port = process.env.PORT || 5000;
 
 app.use(cookieParser());
-// app.use(cors({
-//     origin:"http://localhost:3000",
-//     credentials:true
-// }));
+app.use(cors({
+    origin:allowedOrigins,
+    credentials:true
+}));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
