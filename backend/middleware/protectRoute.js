@@ -3,7 +3,7 @@ import User from "../models/userModel.js";
 
 const protectRoute = async (req,res,next)=>{
     try {
-        const token = res.cookies.jwt;
+        const token = req.cookies.jwt;
         if(!token){
             return res.status(401).json({error:"Unauthorized"});
         };
@@ -23,6 +23,7 @@ const protectRoute = async (req,res,next)=>{
         req.user = user;
         next();
     } catch (error) {
+        
         console.log(error);
         return res.status(500).json({error:"Internal server error"});
     }

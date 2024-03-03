@@ -1,10 +1,12 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
+// import toast from "react-hot-toast";
 export const signupUser = async (req,res)=>{
     try {
         const {fullName,username,password,confirmPassword,gender} = req.body;
         if(password !== confirmPassword){
+            // toast.error("Passwords do not match 😒")
             return res.status(400).json({message:"Passwords do not match"});
         };
 
@@ -61,7 +63,7 @@ export const loginUser = async (req,res)=>{
             return res.status(400).json({message:"Invalid Credentials"});
         }
 
-        generateToken(user._id,res);
+        await generateToken(user._id,res);
 
         return res.status(200).json({
             _id:user._id,

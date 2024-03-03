@@ -1,7 +1,9 @@
 import Conversation from "../models/conversationModel.js";
 import Message from "../models/messageModel.js";
+import { getRecieverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage =  async (req,res)=>{
+ 
     try {
         const {id:recieverId} = req.params;
         const {message} = req.body;
@@ -27,14 +29,17 @@ export const sendMessage =  async (req,res)=>{
             conversation.messages.push(newMessage._id);
         };
 
-        //Socket io functionality
+        
+        await Promise.all([conversation.save(),newMessage.save()]);
 
-        // await conversation.save();
-        // awa1it message.save();
+        const recieverSocketId = getRecieverSocketId(recieverId);
+        if(recieverSocketId){
+            
+            // io.to(<socketId>).emit() , used to send events to specific client
+            io.to(recieverSocketId).emit("newMessage",newMessage);
+        }
 
-        await Promise.all([conversation.save(),message.save()]);
-
-        return res.status(201).json({message:"Message sent successfully"});
+        return res.status(201).json(newMessage);
     } catch (error) {
         console.log(error);
         return res.status(500).json({error:"Internal serever error"});
