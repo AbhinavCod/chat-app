@@ -35,6 +35,7 @@ const Login = () => {
 
         setLoading(true);
         try {
+            console.log("REached");
             const response = await fetch("http://localhost:5000/api/auth/login",{
                 method:"POST",
                 credentials:"include",
@@ -45,6 +46,7 @@ const Login = () => {
             });
             
             const data = await response.json();
+            
             if(data.error){
                 throw new Error(data.error);
             };
