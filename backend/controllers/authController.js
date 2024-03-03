@@ -53,7 +53,9 @@ export const signupUser = async (req,res)=>{
 
 
 export const loginUser = async (req,res)=>{
+    console.log("nOw here");
     try {
+        
         const {username,password} = req.body;
 
         const user = await User.findOne({username});
