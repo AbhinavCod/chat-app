@@ -10,18 +10,18 @@ import messageRoutes from "./routes/message.js";
 import userRoutes from "./routes/userRoute.js";
 
 import {app,server} from "./socket/socket.js";
-// const allowedOrigins = ["http://localhost:3000", "https://chat-app-z77b.onrender.com"];
+const allowedOrigins = ["http://localhost:3000", "https://chat-app-z77b.onrender.com"];
 
 const __dirname = path.resolve();
 
 const port = process.env.PORT || 5000;
 
 app.use(cookieParser());
-// app.use(cors({
-//     origin:allowedOrigins,
-//     credentials:true
-// }));
-app.use(cors());
+app.use(cors({
+    origin:allowedOrigins,
+    credentials:true
+}));
+// app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
