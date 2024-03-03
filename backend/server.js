@@ -36,7 +36,7 @@ app.get("*",(req,res)=>{
     res.sendFile(path.join(__dirname,"frontend","dist","index.html"));
 })
 
-server.listen(port,()=>{
+server.listen(5000,()=>{
     connection();
     console.log(`Server is running at port ${port}`);
 })
