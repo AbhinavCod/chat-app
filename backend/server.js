@@ -10,7 +10,7 @@ import messageRoutes from "./routes/message.js";
 import userRoutes from "./routes/userRoute.js";
 
 import {app,server} from "./socket/socket.js";
-const allowedOrigins = ["http://localhost:3000", "https://your-render-app.onrender.com"];
+const allowedOrigins = ["http://localhost:3000", "https://chat-app-z77b.onrender.com"];
 
 const __dirname = path.resolve();
 
